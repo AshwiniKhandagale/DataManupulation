@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="card" style="margin-top : 20px">
+    <div class="card-header">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#uRegister">User Registration Form</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#uDetails">User Details</a>
+    </li>
+   </ul>
+   </div>
+   <div class="card-body">
+    <div class="alert alert-danger row" *ngIf="error">
+      <strong>Error!</strong>  {{error}}
+    </div>
+    <div class="alert alert-success row" *ngIf="success">
+      <strong>Success!</strong>  {{success}}
+    </div>
+  <div class="tab-content">
+    <div id="uRegister" class="container tab-pane active"><br>
+     <div class="row">
+       <div class="col-6">
+        <div class="form-group">
+          <label for="uname">FirstName</label>
+          <input type="text" class="form-control" id="fName" placeholder="Enter FirstName">
+        </div>
+        <div class="form-group">
+          <label for="uname">Mobile No.</label>
+          <input type="tel" class="form-control" id="mobileNo" placeholder="Enter MobileNo">
+        </div>
+        <div class="form-group">
+          <label for="uname">DOB</label>
+          <input type="Date" class="form-control" id="dob" placeholder="Enter dob">
+        </div>
+       </div>
+       <div class="col-6">
+        <div class="form-group">
+          <label for="uname">LastName</label>
+          <input type="text" class="form-control" id="lName" placeholder="Enter LastName">
+        </div>
+        <div class="form-group">
+          <label for="uname">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email id">
+        </div>
+        <div class="form-group">
+          <label for="uname">Qualification</label>
+          <input type="text" class="form-control" id="qualification" placeholder="Enter qualification">
+        </div>
+       </div>
+     </div>
+     <div class="row" style="float: right;">
+      <button class="btn btn-primary" style="margin-right: 5px;" (click)="saveDataToLocalStorage()">Submit</button>
+      <button class="btn btn-primary" (click)="clearData()">Clear</button>
+     </div>
+    </div>
+    <div id="uDetails" class="container tab-pane fade"><br>
+      <div class="table-responsive-sm" *ngIf="userData.length>0">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>DOB</th>
+              <th>Email</th>
+              <th>MobileNo.</th>
+              <th>Qualification</th>
+              <th>Action</th>
+               </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of userData; let i = index">
+              <td>{{i+1}}</td>
+              <td><input type="text" class="form-control" id="fName" placeholder="Enter FirstName" [(ngModel)]="item.firstName" [disabled]="item.isEditData"></td>
+              <td>  <input type="text" class="form-control" id="lName" placeholder="Enter LastName" [(ngModel)]="item.lastName" [disabled]="item.isEditData"></td>
+              <td> <input type="Date" class="form-control" id="dob" placeholder="Enter dob"  [(ngModel)]="item.dob" [disabled]="item.isEditData"></td>
+              <td><input type="email" class="form-control" id="email" placeholder="Enter email"  [(ngModel)]="item.email" [disabled]="item.isEditData"> </td>
+              <td><input type="tel" class="form-control" id="mno" placeholder="Enter mobileNo" [(ngModel)]="item.mobileNo" [disabled]="item.isEditData"></td>
+              <td><input type="text" class="form-control" id="mno" placeholder="Enter Qualification" [(ngModel)]="item.qualification" [disabled]="item.isEditData"></td>
+              <td><i class="fa fa-pencil" aria-hidden="true"  style='font-size:24px; margin-right: 10px;' (click)="editUserDetails(i,item)"></i><i class="fa fa-trash-o" aria-hidden="true" style='font-size:24px' (click)="deleteRecord(i)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+
